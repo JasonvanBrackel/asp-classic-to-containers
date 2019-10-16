@@ -1,7 +1,7 @@
 # We need IIS
 FROM mcr.microsoft.com/windows/servercore/iis:windowsservercore-1903
 
-# We're going to do our IIS Administration from Powershell
+# We're going to do our IIS Administration with Powershell
 SHELL ["powershell", "-Command"]
 
 RUN New-Item -Path C:\Chat -ItemType Directory

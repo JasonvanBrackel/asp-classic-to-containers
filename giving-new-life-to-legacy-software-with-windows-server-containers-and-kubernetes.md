@@ -199,7 +199,7 @@ Fortunately the steps we took to get this processing working manually, will help
 # We need IIS
 FROM mcr.microsoft.com/windows/servercore/iis:windowsservercore-1903
 
-# We're going to do our IIS Administration from Powershell
+# We're going to do our IIS Administration with Powershell
 SHELL ["powershell", "-Command"]
 
 # Create the path for the applications
@@ -302,13 +302,13 @@ Successfully tagged morehumansoftware/chat:latest
 Let's test this locally and see if it works.
 
 ```powershell
-docker run -d -p 8080:80 morehumansoftware/chat:latest
+> docker run -d -p 8080:80 morehumansoftware/chat:latest
 6ea35053ba4cfe8720319781307b7ea0e0efeec3890027e73ed95d243ca1d0fb
 ```
 
 Now opening my browser to http://localhost:8080/default.htm, I see my containerized ASP Classic application.
 
-![Containerized ASP Classic Application](./16-Containerized.png)
+![Containerized ASP Classic Application](./16-containerized.png)
 
 ## Easy Gains
 
