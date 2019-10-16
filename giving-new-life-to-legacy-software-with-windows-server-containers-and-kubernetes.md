@@ -151,7 +151,7 @@ First thing I wanted to do was to see if this application would still work with 
 Right Click on Application Pools > Add Application Pool
 Create the Settings as Shown
 ![Add Application Pool](./09-add-app-pool.png)
-![Application Pool Settings](./10-asp.pool.png)
+![Application Pool Settings](./10-asp-pool.png)
 
 7. Create Website
 Right Click on the Sites > Add Website
