@@ -160,7 +160,7 @@ Right Click on the Sites > Add Website
 8. Under Site name, Click Select and select the ASP-Pool we just created
 ![Select App-Pool](./12-select-pool.png)
 
-9. Select the path where you put the chat app.  Make sure the [IUSR user](https://docs.microsoft.com/en-us/iis/get-started/planning-for-security/understanding-built-in-user-and-group-accounts-in-iis) has access to this path. and click OK.
+9. Select the path where you put the chat app.  Make sure the [IUSR user](https://docs.microsoft.com/en-us/iis/get-started/planning-for-security/understanding-built-in-user-and-group-accounts-in-iis) has access to this path. Click OK.
 ![Website Settings](./13-site-settings.png)
 
 If your permissions are setup correctly you'll be able to navigate to the chat page.
@@ -169,23 +169,23 @@ If your permissions are setup correctly you'll be able to navigate to the chat p
 If not check that the IUSR user has access to the path where you placed the website.
 ![Folder Security](./15-folder-security.png)
 
-We've not confirm this ancient application can still run on a more modern copy of IIS.  So let's now take advantage of containerization and Kubernetes.
+We've confirmed this ancient application can still run on a more modern copy of IIS.  So let's now take advantage of containerization and Kubernetes.
 
 ## Sound Automation Practices
 
-Let's assume for a minute you received this application via a zip file like our download today.  There's a couple of practices I would immediately put in place.  Adopting [the first way of DevOps](https://itrevolution.com/the-three-ways-principles-underpinning-devops/) we'll start controlling the workflow from this application to production.  Here are a couple of practices we could put into place.
+Let's assume for a minute you received this application via a zip file like our download today.  There's a couple of practices I would immediately put in place.  Adopting [the first way of DevOps](https://itrevolution.com/the-three-ways-principles-underpinning-devops/) we'll start controlling the workflow from this application to production.  Here's what we shoud do immediately.
 
-- Source Control
+### Source Control
 
 This application may not have been stored in a source code managment system.  Although there were many available at the time like [PVCS](https://www.microfocus.com/en-us/products/pvcs/overview) and [CVS](https://savannah.nongnu.org/projects/cvs).  The former of which I was surprised was still going although Polytron (the P in PVCS) was acquired and is now part of Micro Focus / Serena Software.
 
-- Automated Build
+### Automated Build
 
 In this case these files are not built into a binary, so a build step is not necessary.
 
-- Automated Testing
+### Automated Testing
 
-Since this software is in a known working state, we should keep it that way.  The only way to prove that changes to files does not break functionality would be Test Driven Development.  Even if it were not possible to easily test he asp code, it would be possible to test the running application witha framework like [Selenium](https://www.seleniumhq.org).
+Since this software is in a known working state, we should keep it that way.  The only way to prove that changes to filescode do not break functionality would be testing.  Automated testing and event [Test Driven Development](https://www.agilealliance.org/glossary/tdd/) are very effective.  Even if it were not possible to easily test he asp code, it would be possible to test the running application witha framework like [Selenium](https://www.seleniumhq.org).
 
 This is just a start there's a lot more that can be done here, but let's create the container definition for this applications.
 
