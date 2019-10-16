@@ -1,0 +1,163 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chat-one
+  name: chat-one
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: chat-one
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: chat-one
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - windows
+      containers:
+      - image: morehumansoftware/chat:latest
+        imagePullPolicy: Always
+        name: chat-one
+        ports:
+        - containerPort: 80
+          name: chat-one-port
+          protocol: TCP
+      tolerations:
+      - effect: NoSchedule
+        key: windows-only
+        operator: Equal
+        value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: chat-one
+  name: chat-one-nodeport
+  namespace: default
+spec:
+  ports:
+  - name: chat-one-port
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: chat-one
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: chat-on
+  name: chat-one-ingress
+  namespace: default
+spec:
+  rules:
+  - host: chat-one-ingress.default.<publicip>.xip.io
+    http:
+      paths:
+      - backend:
+          serviceName: chat-one-nodeport
+          servicePort: 80
+        path: /
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chat-two
+  name: chat-two
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: chat-two
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: chat-two
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - windows
+      containers:
+      - image: morehumansoftware/chat:latest
+        imagePullPolicy: Always
+        name: chat-two
+        ports:
+        - containerPort: 80
+          name: chat-two-port
+          protocol: TCP
+      tolerations:
+      - effect: NoSchedule
+        key: windows-only
+        operator: Equal
+        value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: chat-two
+  name: chat-two-nodeport
+  namespace: default
+spec:
+  ports:
+  - name: chat-two-port
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: chat-two
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: chat-two
+  name: chat-two-ingress
+  namespace: default
+spec:
+  rules:
+  - host: chat-two-ingress.default.<publicip>.xip.io
+    http:
+      paths:
+      - backend:
+          serviceName: chat-two-nodeport
+          servicePort: 80
+        path: /
+
+

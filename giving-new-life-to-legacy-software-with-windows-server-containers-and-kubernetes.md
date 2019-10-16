@@ -128,46 +128,46 @@ end sub
 First thing I wanted to do was to see if this application would still work with a manual deployment.  To do this I need to run IIS with ASP support.  My development laptop didn't have that installed.  So I installed it.
 
 1. Navigate to Control Panel > Program and Features > Turn Window features on or off
-![Control Panel](01-control-panel.png)
-![Programs and Features](02-programs-and-features.png)
-![Turn Windows Features On or Off](03-windows-features.png)
+![Control Panel](./01-control-panel.png)
+![Programs and Features](./02-programs-and-features.png)
+![Turn Windows Features On or Off](./03-windows-features.png)
 
 2. Select ASP and Static Content and Click OK
-![Select ASP](04-select-asp.png)
-![Select Static Content](04-select-static-content.png)
+![Select ASP](./04-select-asp.png)
+![Select Static Content](./04-select-static-content.png)
 
 3. Wait for installation to complete, click OK.
-![Installing IIS with ASP Classic 1](05-installing-iis-with-asp-classic-1.png)
-![Installing IIS with ASP Classic 2](06-installing-iis-with-asp-classic-2.png)
-![Installing IIS with ASP Classic 3](07-installing-iis-with-asp-classic-3.png)
+![Installing IIS with ASP Classic 1](./05-installing-iis-with-asp-classic-1.png)
+![Installing IIS with ASP Classic 2]./(06-installing-iis-with-asp-classic-2.png)
+![Installing IIS with ASP Classic 3](./07-installing-iis-with-asp-classic-3.png)
 
 4. Do the same with the IIS Management Console
-![Install the IIS Management Console](08-iis-management-console.png)
+![Install the IIS Management Console](./08-iis-management-console.png)
 
 5. Open IIS Mangement Console
-![IIS Manager](08-open-iis.png)
+![IIS Manager](./08-open-iis.png)
 
 6. After Removing the Existing Default Site
 Right Click on Application Pools > Add Application Pool
 Create the Settings as Shown
-![Add Application Pool](09-add-app-pool.png)
-![Application Pool Settings](10-asp.pool.png)
+![Add Application Pool](./09-add-app-pool.png)
+![Application Pool Settings](./10-asp.pool.png)
 
 7. Create Website
 Right Click on the Sites > Add Website
-![Add Website](11-add-website.png)
+![Add Website](./11-add-website.png)
 
 8. Under Site name, Click Select and select the ASP-Pool we just created
-![Select App-Pool](12-select-pool.png)
+![Select App-Pool](./12-select-pool.png)
 
 9. Select the path where you put the chat app.  Make sure the [IUSR user](https://docs.microsoft.com/en-us/iis/get-started/planning-for-security/understanding-built-in-user-and-group-accounts-in-iis) has access to this path. and click OK.
-![Website Settings](13-site-settings.png)
+![Website Settings](./13-site-settings.png)
 
 If your permissions are setup correctly you'll be able to navigate to the chat page.
-![Chat Application](14-chat.png)
+![Chat Application](./14-chat.png)
 
 If not check that the IUSR user has access to the path where you placed the website.
-![Folder Security](15-folder-security.png)
+![Folder Security](./15-folder-security.png)
 
 We've not confirm this ancient application can still run on a more modern copy of IIS.  So let's now take advantage of containerization and Kubernetes.
 
@@ -308,7 +308,7 @@ docker run -d -p 8080:80 morehumansoftware/chat:latest
 
 Now opening my browser to http://localhost:8080/default.htm, I see my containerized ASP Classic application.
 
-![Containerized ASP Classic Application](16-Containerized.png)
+![Containerized ASP Classic Application](./16-Containerized.png)
 
 ## Easy Gains
 
@@ -344,11 +344,11 @@ I've setup a Rancher Cluster, with a managed cluster that includes Window Nodes.
 
 In addition to the provisioning done in this script.  Let's add one thing.  Once the Windows node becomes active in the cluster taint the Windows node with a NoSchedule taint.  We do this so that Kubernetes doesn't schedule linux container images to the Windows node.
 
-![NoSchedule Taint](17-add-taint.png)
+![NoSchedule Taint](./17-add-taint.png)
 
 Make note of the OS label as well.
 
-![OS Label](18-os-label.png)
+![OS Label](./18-os-label.png)
 
 ### Automatic multi-tenacy using Kubernetes Deployments, Services and Ingresses
 
