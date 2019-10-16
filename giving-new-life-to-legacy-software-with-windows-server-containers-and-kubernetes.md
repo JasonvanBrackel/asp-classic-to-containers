@@ -520,6 +520,7 @@ spec:
         path: /
 ```
 
+Now this wasn't a perfect migration.  The IP address is always be the entry point of traffic into either the service or the ingress.  But it's still isolated to the individual instance, so close enough for our example.
 Without any application modification, we're now able to make this application multi-tenant.  This is just the beginning.  Here are a few other ideas that you could accomplish without code modification.
 
 - Support for TLS which was not available in 2000
