@@ -312,7 +312,7 @@ Now opening my browser to http://localhost:8080/default.htm, I see my containeri
 
 ## Easy Gains
 
-So what have we gained already? Beside source control and the ability to test our code, we've lost the need for our old hardware.  This method easily applies to pretty much any application that can be installed and configured via the command line.  For those that have other install methods I've used this general guidelines  
+So what have we gained already? Beside source control and the ability to test our code, we've lost the need for our old hardware.  This method easily applies to pretty much any application that can be installed and configured via the command line.  For those that have other install methods I've used this set of general guidelines to automate the installation of the application.  This can also work for non-containerized applications, by replacing the Dockerfile with an install script.
 
 1. Take a snapshot of an empty operating system, pre-install.
 2. Install the application.
@@ -321,7 +321,7 @@ So what have we gained already? Beside source control and the ability to test ou
 5. Script the changes to the registry using powershell.
 6. Create a Dockerfile that immitates the installation process and registry changes.
 
-Containerizing other applications may be more difficult, but the gains are worth it.  In addtion to the aforementioned progress, there is now a unified and consistent deployment model for all application types and operating system configurations.  Now let's take things to the next level with Kubernetes.
+Containerizing other applications may be more difficult, but the gains are worth it.  In addtion to the aforementioned advantages, there is now a unified and consistent deployment model for all application types and operating system configurations.  Now let's take things to the next level with Kubernetes.
 
 ## Taking to the next level with Kubernetes
 
@@ -342,7 +342,7 @@ I've setup a Rancher Cluster, with a managed cluster that includes Window Nodes.
 
 ### Scheduling with Multiple OSes
 
-In addition to the provisioning done in this script.  Let's add one thing.  Once the Windows node becomes active in the cluster taint the Windows node with a NoSchedule taint.  We do this so that Kubernetes doesn't schedule linux container images to the Windows node.
+In addition to the provisioning done in this script.  Let's add one thing.  Once the Windows node becomes active in the cluster [taint the Windows node with a NoSchedule taint](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).  We do this so that Kubernetes doesn't schedule linux container images to the Windows node.
 
 ![NoSchedule Taint](./17-add-taint.png)
 
