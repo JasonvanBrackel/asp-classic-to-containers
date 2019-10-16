@@ -138,7 +138,7 @@ First thing I wanted to do was to see if this application would still work with 
 
 3. Wait for installation to complete, click OK.
 ![Installing IIS with ASP Classic 1](./05-installing-iis-with-asp-classic-1.png)
-![Installing IIS with ASP Classic 2]./(06-installing-iis-with-asp-classic-2.png)
+![Installing IIS with ASP Classic 2](./06-installing-iis-with-asp-classic-2.png)
 ![Installing IIS with ASP Classic 3](./07-installing-iis-with-asp-classic-3.png)
 
 4. Do the same with the IIS Management Console
